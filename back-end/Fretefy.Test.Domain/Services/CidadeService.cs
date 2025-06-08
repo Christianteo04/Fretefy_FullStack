@@ -1,10 +1,10 @@
 ﻿using Fretefy.Test.Domain.Entities;
-using Fretefy.Test.Domain.Interfaces;
 using Fretefy.Test.Domain.Interfaces.Repositories;
+using Fretefy.Test.Domain.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace Fretefy.Test.Domain.Services
 {
@@ -17,24 +17,24 @@ namespace Fretefy.Test.Domain.Services
             _cidadeRepository = cidadeRepository;
         }
 
-        public Cidade Get(Guid id)
+        public async Task<Cidade> GetByIdAsync(Guid id)
         {
-            return _cidadeRepository.List().FirstOrDefault(f => f.Id == id);
+            return await _cidadeRepository.GetByIdAsync(id);
         }
 
-        public IEnumerable<Cidade> List()
+        public async Task<IEnumerable<Cidade>> ListAsync()
         {
-            return _cidadeRepository.List();
+            return await _cidadeRepository.ListAsync();
         }
 
-        public IEnumerable<Cidade> ListByUf(string uf)
+        public async Task<IEnumerable<Cidade>> ListByUfAsync(string uf)
         {
-            return _cidadeRepository.ListByUf(uf);
+            return await _cidadeRepository.ListByUfAsync(uf);
         }
 
-        public IEnumerable<Cidade> Query(string terms)
+        public async Task<IEnumerable<Cidade>> QueryAsync(string terms)
         {
-            return _cidadeRepository.Query(terms);
+            return await _cidadeRepository.QueryAsync(terms);
         }
     }
 }

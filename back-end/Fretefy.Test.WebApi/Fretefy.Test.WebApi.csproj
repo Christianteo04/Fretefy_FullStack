@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.105.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0">
@@ -16,6 +17,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Fretefy.Test.Domain\Fretefy.Test.Domain.csproj" />
     <ProjectReference Include="..\Fretefy.Test.Infra\Fretefy.Test.Infra.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Data\Test.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

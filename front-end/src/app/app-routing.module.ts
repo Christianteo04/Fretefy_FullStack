@@ -19,6 +19,11 @@ const routes: Routes = [
   { 
     path: '**', 
     redirectTo: '/home' 
+  },
+  { path: '', redirectTo: '/regioes', pathMatch: 'full' }, 
+  {
+    path: 'regioes', 
+    loadChildren: () => import('./modules/regiao/regiao.module').then(m => m.RegiaoModule)
   }
 ];
 

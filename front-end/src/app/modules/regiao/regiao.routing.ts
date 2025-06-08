@@ -1,11 +1,16 @@
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegiaoComponent } from './regiao.component';
+import { RegiaoListComponent } from './components/regiao-list/regiao-list.component';
+import { RegiaoFormComponent } from './components/regiao-form/regiao-form.component';
 
 const routes: Routes = [
-  { 
-    path: '',
-    component: RegiaoComponent
-  },
+  { path: '', component: RegiaoListComponent },
+  { path: 'nova', component: RegiaoFormComponent }, 
+  { path: 'editar/:id', component: RegiaoFormComponent } 
 ];
 
-export const  RegiaoRoutingModule = RouterModule.forChild(routes);
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class RegiaoRoutingModule { }

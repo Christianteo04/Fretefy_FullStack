@@ -1,0 +1,62 @@
+<div class="modal-header">
+  <h2>{{ isEditMode ? 'Editar Região' : 'Cadastrar Nova Região' }}</h2>
+  <button type="button" class="close-button" (click)="onCancel()" aria-label="Fechar">&times;</button>
+</div>
+
+<div *ngIf="isLoading" class="loading-indicator">Salvando...</div>
+<div *ngIf="mensagemErro && !isLoading" class="error-message">{{ mensagemErro }}</div>
+<div *ngIf="mensagemSucesso && !isLoading" class="success-message">{{ mensagemSucesso }}</div>
+
+<form [formGroup]="regiaoForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading && !mensagemSucesso">
+  <div class="form-group">
+    <label for="nome">Nome da Região:</label>
+    <input id="nome" type="text" formControlName="nome">
+    <div *ngIf="nomeFormControl.invalid && (nomeFormControl.dirty || nomeFormControl.touched)" class="validation-errors">
+      <small *ngIf="nomeFormControl.hasError('required')">Nome é obrigatório.</small>
+      <small *ngIf="nomeFormControl.hasError('minlength')">
+        Nome deve ter pelo menos {{ nomeFormControl.errors?.minlength?.requiredLength }} caracteres.
+      </small>
+    </div>
+  </div>
+
+  <div formArrayName="cidades" class="form-group">
+    <h3>Cidades da Região:</h3>
+
+    <div *ngFor="let cidadeCtrl of cidadesFormArray.controls; let i = index" class="cidade-item">
+      
+      <div class="selector-container">
+        
+        <app-cidade-selector
+          [formControl]="cidadeCtrl"
+          [label]="'Cidade ' + (i + 1)"
+          [listaCidades]="todasAsCidades$ | async"
+          [cidadesJaSelecionadas]="cidadesSelecionadasNoForm" placeholder="Selecione uma cidade">
+        </app-cidade-selector>
+
+        <div *ngIf="cidadeCtrl.invalid && (cidadeCtrl.dirty || cidadeCtrl.touched)" class="validation-errors">
+          <small *ngIf="cidadeCtrl.hasError('required')">Cidade é obrigatória.</small>
+          <small *ngIf="cidadeCtrl.hasError('cidadeDuplicada')">Esta cidade já foi selecionada.</small>
+        </div>
+
+      </div>
+      <button *ngIf="cidadesFormArray.length > 1" type="button" (click)="removeCidade(i)" class="remove-button">
+  Remover Cidade
+</button>
+
+    </div>
+
+    <button type="button" (click)="addCidade()" class="add-button">Adicionar Cidade</button>
+
+    <div *ngIf="cidadesFormArray.invalid && (cidadesFormArray.dirty || cidadesFormArray.touched) && cidadesFormArray.hasError('minCidades')" class="validation-errors array-error">
+      <small>É obrigatório informar ao menos {{ cidadesFormArray.getError('minCidades')?.requiredMin }} cidade(s).</small>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" [disabled]="regiaoForm.invalid || isLoading" class="button submit-button">
+      {{ isEditMode ? 'Salvar Alterações' : 'Cadastrar Região' }}
+    </button>
+    <button type="button" (click)="onCancel()" class="button cancel-button">Cancelar</button>
+  </div>
+</form> 
+

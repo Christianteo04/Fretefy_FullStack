@@ -1,0 +1,16 @@
+<div>
+  <label *ngIf="label">{{ label }}:</label>
+
+ <select [ngModel]="selectedCidadeId" (change)="onSelectionChange($event)">
+    
+    <option [ngValue]="null" disabled>{{ placeholder }}</option>
+    
+    <ng-container *ngFor="let cidade of listaCidades">
+      
+     <option [value]="cidade.id" [disabled]="!isCidadeDisponivel(cidade)">
+        {{ cidade.nome }} - {{ cidade.uf }}
+      </option>
+      
+    </ng-container>
+  </select>
+</div>

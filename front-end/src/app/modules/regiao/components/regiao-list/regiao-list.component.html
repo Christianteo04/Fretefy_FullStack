@@ -1,0 +1,46 @@
+<div *ngIf="mensagemErro" class="error-message">
+  {{ mensagemErro }}
+</div>
+
+<h2>Listagem de Regiões</h2>
+<div class="actions-container">
+  <button (click)="abrirModalDeRegiao()" class="button-add">Cadastrar Nova Região</button>
+
+  <button type="button" class="button export-excel-button" (click)="exportarParaExcel()">
+    Exportar para Excel
+  </button>
+</div>
+
+<table *ngIf="regioes$ | async as regioes; else loadingOrError">
+  <thead>
+    <tr>
+      <th>Região</th>
+      <th>Cidades</th>
+      <th>Status</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let regiao of regioes">
+      <td>{{ regiao.nome }}</td>
+      <td>{{ getCidadesNomes(regiao.cidades) }}</td>
+      <td>{{ regiao.ativo ? 'Ativa' : 'Inativa' }}</td>
+     <td class="actions-cell">
+  <button class="action-button edit" (click)="abrirModalDeRegiao(regiao.id)">Editar</button>
+  <button *ngIf="regiao.ativo" class="action-button deactivate" (click)="toggleAtivo(regiao)">Desativar</button>
+  <button *ngIf="!regiao.ativo" class="action-button activate" (click)="toggleAtivo(regiao)">Ativar</button>
+</td>
+    </tr>
+    <tr *ngIf="regioes.length === 0">
+      <td colspan="4">Nenhuma região cadastrada.</td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #loadingOrError>
+  <p *ngIf="!mensagemErro">Carregando regiões...</p>
+  </ng-template>
+
+<style>
+ 
+</style>

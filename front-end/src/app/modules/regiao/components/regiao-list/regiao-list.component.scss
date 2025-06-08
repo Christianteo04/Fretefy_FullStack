@@ -1,0 +1,177 @@
+$primary-color: #3498db; 
+$primary-color-hover: #2980b9;
+$danger-color: #e74c3c;
+$danger-color-hover: #c0392b;
+$success-color: #2ecc71;
+$success-color-hover: #27ae60;
+$light-gray: #f8f9fa;
+$border-color: #dee2e6;
+$text-color: #495057;
+$header-text-color: #212529;
+$border-radius: 5px;
+$box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+:host {
+  display: block;
+  padding: 2rem;
+  background-color: $light-gray;
+}
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: $header-text-color;
+  margin-bottom: 1.5rem;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5em;
+  background-color: #ffffff;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  overflow: hidden; 
+
+  th, td {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    border-bottom: 1px solid $border-color;
+    color: $text-color;
+    vertical-align: middle;
+  }
+
+  thead th {
+    background-color: #ffffff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: $header-text-color;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  tbody tr {
+    transition: background-color 0.2s ease-in-out;
+    &:hover {
+      background-color: $light-gray;
+    }
+  }
+  
+  .empty-row td {
+      text-align: center;
+      padding: 2rem;
+      color: #777;
+  }
+}
+
+.actions-cell {
+    display: flex;
+    gap: 8px;
+}
+
+.action-button {
+  background-color: transparent;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+
+  &.edit {
+    color: $primary-color;
+    border-color: $primary-color;
+    &:hover {
+      background-color: $primary-color;
+      color: white;
+    }
+  }
+  
+  &.activate {
+    color: $success-color;
+    border-color: $success-color;
+    &:hover {
+      background-color: $success-color;
+      color: white;
+    }
+  }
+
+  &.deactivate {
+    color: $danger-color;
+    border-color: $danger-color;
+    &:hover {
+      background-color: $danger-color;
+      color: white;
+    }
+  }
+}
+
+.error-message {
+  color: $danger-color;
+  background-color: #fbe9e7;
+  border: 1px solid $danger-color;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: $border-radius;
+}
+
+.actions-container {
+  display: flex; 
+  gap: 1rem;     
+  align-items: center; 
+  margin-bottom: 1.5rem; 
+}
+
+.button-add {
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: $border-radius;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease, box-shadow 0.2s ease;
+  display: inline-flex; 
+  align-items: center;
+  gap: 8px; 
+
+  &:hover {
+    background-color: $primary-color-hover;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}
+
+.export-excel-button {
+  background-color: $success-color; 
+  color: white; 
+
+  padding: 10px 20px; 
+  border: none;       
+  border-radius: $border-radius; 
+
+  font-size: 1rem;
+  font-weight: 500;
+
+  cursor: pointer;
+  
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background-color: $success-color-hover;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}

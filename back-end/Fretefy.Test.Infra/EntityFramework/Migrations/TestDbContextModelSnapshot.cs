@@ -45,7 +45,7 @@ namespace Fretefy.Test.Infra.EntityFramework.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a3fc3b39-3c3c-4a58-8c50-fdd19209777f"),
+                            Id = new Guid("f3e12736-8e67-4bdb-852c-643423e0ef89"),
                             Nome = "Maceió",
                             UF = "AL"
                         },
@@ -71,7 +71,7 @@ namespace Fretefy.Test.Infra.EntityFramework.Migrations
                         {
                             Id = new Guid("e3dcbced-4326-4007-94df-c33f8c77a204"),
                             Nome = "Fortaleza",
-                            UF = " CE"
+                            UF = "CE"
                         },
                         new
                         {
@@ -199,6 +199,64 @@ namespace Fretefy.Test.Infra.EntityFramework.Migrations
                             Nome = "Palmas",
                             UF = "TO"
                         });
+                });
+
+            modelBuilder.Entity("Fretefy.Test.Domain.Entities.Regiao", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Regiao");
+                });
+
+            modelBuilder.Entity("Fretefy.Test.Domain.Entities.RegiaoCidade", b =>
+                {
+                    b.Property<Guid>("RegiaoId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CidadeId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("RegiaoId", "CidadeId");
+
+                    b.HasIndex("CidadeId");
+
+                    b.ToTable("RegiaoCidade");
+                });
+
+            modelBuilder.Entity("Fretefy.Test.Domain.Entities.RegiaoCidade", b =>
+                {
+                    b.HasOne("Fretefy.Test.Domain.Entities.Cidade", "Cidade")
+                        .WithMany()
+                        .HasForeignKey("CidadeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Fretefy.Test.Domain.Entities.Regiao", "Regiao")
+                        .WithMany("RegiaoCidades")
+                        .HasForeignKey("RegiaoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cidade");
+
+                    b.Navigation("Regiao");
+                });
+
+            modelBuilder.Entity("Fretefy.Test.Domain.Entities.Regiao", b =>
+                {
+                    b.Navigation("RegiaoCidades");
                 });
 #pragma warning restore 612, 618
         }
