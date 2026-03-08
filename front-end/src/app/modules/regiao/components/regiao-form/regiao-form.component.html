@@ -1,7 +1,4 @@
-<div class="modal-header">
-  <h2>{{ isEditMode ? 'Editar Região' : 'Cadastrar Nova Região' }}</h2>
-  <button type="button" class="close-button" (click)="onCancel()" aria-label="Fechar">&times;</button>
-</div>
+<h2>{{ isEditMode ? 'Editar Região' : 'Cadastrar Nova Região' }}</h2>
 
 <div *ngIf="isLoading" class="loading-indicator">Salvando...</div>
 <div *ngIf="mensagemErro && !isLoading" class="error-message">{{ mensagemErro }}</div>
@@ -11,7 +8,8 @@
   <div class="form-group">
     <label for="nome">Nome da Região:</label>
     <input id="nome" type="text" formControlName="nome">
-    <div *ngIf="nomeFormControl.invalid && (nomeFormControl.dirty || nomeFormControl.touched)" class="validation-errors">
+    <div *ngIf="nomeFormControl.invalid && (nomeFormControl.dirty || nomeFormControl.touched)"
+      class="validation-errors">
       <small *ngIf="nomeFormControl.hasError('required')">Nome é obrigatório.</small>
       <small *ngIf="nomeFormControl.hasError('minlength')">
         Nome deve ter pelo menos {{ nomeFormControl.errors?.minlength?.requiredLength }} caracteres.
@@ -23,14 +21,11 @@
     <h3>Cidades da Região:</h3>
 
     <div *ngFor="let cidadeCtrl of cidadesFormArray.controls; let i = index" class="cidade-item">
-      
+
       <div class="selector-container">
-        
-        <app-cidade-selector
-          [formControl]="cidadeCtrl"
-          [label]="'Cidade ' + (i + 1)"
-          [listaCidades]="todasAsCidades$ | async"
-          [cidadesJaSelecionadas]="cidadesSelecionadasNoForm" placeholder="Selecione uma cidade">
+
+        <app-cidade-selector [formControl]="cidadeCtrl" [label]="'Cidade ' + (i + 1)"
+          placeholder="Selecione uma cidade">
         </app-cidade-selector>
 
         <div *ngIf="cidadeCtrl.invalid && (cidadeCtrl.dirty || cidadeCtrl.touched)" class="validation-errors">
@@ -39,16 +34,20 @@
         </div>
 
       </div>
-      <button *ngIf="cidadesFormArray.length > 1" type="button" (click)="removeCidade(i)" class="remove-button">
-  Remover Cidade
-</button>
+      <button *ngIf="cidadesFormArray.length > 1" type="button" (click)="removeCidade(i)" class="remove-button"
+        title="Remover Cidade">
+        <i class="material-icons">delete</i>
+      </button>
 
     </div>
 
     <button type="button" (click)="addCidade()" class="add-button">Adicionar Cidade</button>
 
-    <div *ngIf="cidadesFormArray.invalid && (cidadesFormArray.dirty || cidadesFormArray.touched) && cidadesFormArray.hasError('minCidades')" class="validation-errors array-error">
-      <small>É obrigatório informar ao menos {{ cidadesFormArray.getError('minCidades')?.requiredMin }} cidade(s).</small>
+    <div
+      *ngIf="cidadesFormArray.invalid && (cidadesFormArray.dirty || cidadesFormArray.touched) && cidadesFormArray.hasError('minCidades')"
+      class="validation-errors array-error">
+      <small>É obrigatório informar ao menos {{ cidadesFormArray.getError('minCidades')?.requiredMin }}
+        cidade(s).</small>
     </div>
   </div>
 
@@ -58,5 +57,4 @@
     </button>
     <button type="button" (click)="onCancel()" class="button cancel-button">Cancelar</button>
   </div>
-</form> 
-
+</form>

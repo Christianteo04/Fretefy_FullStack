@@ -1,6 +1,10 @@
 <ul>
-  <li>
-    <a [routerLink]="['/home']" routerLinkActive="active">Home</a>
-    <a [routerLink]="['/regiao']" routerLinkActive="active">Gerenciar Regioes</a>
+  <li class="nav-links">
+    <a [routerLink]="['/regiao']" routerLinkActive="active">Gerenciar Regiões</a>
+  </li>
+  <li class="actions">
+    <button class="theme-toggle" (click)="toggleTheme()" title="Alternar Tema Escuro/Claro">
+      <i class="material-icons">{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</i>
+    </button>
   </li>
 </ul>

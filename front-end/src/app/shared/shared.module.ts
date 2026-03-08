@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { CidadeSelectorComponent } from './components/cidade-selector/cidade-selector.component';
 
 @NgModule({
@@ -8,8 +7,7 @@ import { CidadeSelectorComponent } from './components/cidade-selector/cidade-sel
     CidadeSelectorComponent
   ],
   imports: [
-    CommonModule,
-    FormsModule
+    CommonModule
   ],
   exports: [
     CidadeSelectorComponent

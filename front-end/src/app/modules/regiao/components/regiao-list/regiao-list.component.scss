@@ -1,144 +1,36 @@
-$primary-color: #3498db; 
-$primary-color-hover: #2980b9;
-$danger-color: #e74c3c;
-$danger-color-hover: #c0392b;
-$success-color: #2ecc71;
-$success-color-hover: #27ae60;
-$light-gray: #f8f9fa;
-$border-color: #dee2e6;
-$text-color: #495057;
-$header-text-color: #212529;
-$border-radius: 5px;
-$box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-
 :host {
   display: block;
-  padding: 2rem;
-  background-color: $light-gray;
 }
 
 h2 {
   font-size: 1.75rem;
-  font-weight: 500;
-  color: $header-text-color;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-top: 0;
   margin-bottom: 1.5rem;
 }
 
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1.5em;
-  background-color: #ffffff;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
-  overflow: hidden; 
-
-  th, td {
-    padding: 1rem 1.25rem;
-    text-align: left;
-    border-bottom: 1px solid $border-color;
-    color: $text-color;
-    vertical-align: middle;
-  }
-
-  thead th {
-    background-color: #ffffff;
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: $header-text-color;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  tbody tr {
-    transition: background-color 0.2s ease-in-out;
-    &:hover {
-      background-color: $light-gray;
-    }
-  }
-  
-  .empty-row td {
-      text-align: center;
-      padding: 2rem;
-      color: #777;
-  }
-}
-
-.actions-cell {
-    display: flex;
-    gap: 8px;
-}
-
-.action-button {
-  background-color: transparent;
-  border: 1px solid $border-color;
-  border-radius: $border-radius;
-  padding: 6px 12px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.2s ease;
-
-  &.edit {
-    color: $primary-color;
-    border-color: $primary-color;
-    &:hover {
-      background-color: $primary-color;
-      color: white;
-    }
-  }
-  
-  &.activate {
-    color: $success-color;
-    border-color: $success-color;
-    &:hover {
-      background-color: $success-color;
-      color: white;
-    }
-  }
-
-  &.deactivate {
-    color: $danger-color;
-    border-color: $danger-color;
-    &:hover {
-      background-color: $danger-color;
-      color: white;
-    }
-  }
-}
-
-.error-message {
-  color: $danger-color;
-  background-color: #fbe9e7;
-  border: 1px solid $danger-color;
-  padding: 1rem;
-  margin: 1rem 0;
-  border-radius: $border-radius;
-}
-
 .actions-container {
-  display: flex; 
-  gap: 1rem;     
-  align-items: center; 
-  margin-bottom: 1.5rem; 
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 .button-add {
-  background-color: $primary-color;
+  background-color: var(--primary-color);
   color: white;
-  border: none;
   padding: 10px 20px;
-  border-radius: $border-radius;
   font-size: 1rem;
   font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out, transform 0.1s ease, box-shadow 0.2s ease;
-  display: inline-flex; 
+  text-decoration: none;
+  display: inline-flex;
   align-items: center;
-  gap: 8px; 
+  gap: 8px;
+  border-radius: var(--border-radius);
 
   &:hover {
-    background-color: $primary-color-hover;
+    background-color: var(--primary-hover);
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
@@ -150,28 +42,123 @@ table {
 }
 
 .export-excel-button {
-  background-color: $success-color; 
-  color: white; 
-
-  padding: 10px 20px; 
-  border: none;       
-  border-radius: $border-radius; 
-
+  background-color: var(--success-color);
+  color: white;
+  padding: 10px 20px;
   font-size: 1rem;
   font-weight: 500;
 
-  cursor: pointer;
-  
-  transition: background-color 0.2s ease-in-out, transform 0.1s ease, box-shadow 0.2s ease;
-
   &:hover {
-    background-color: $success-color-hover;
+    background-color: var(--success-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   &:active {
     transform: translateY(0);
     box-shadow: none;
   }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--background-card);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+
+  th,
+  td {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-muted);
+    vertical-align: middle;
+  }
+
+  td {
+    color: var(--text-main);
+  }
+
+  thead th {
+    background-color: var(--background-page);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border-color);
+  }
+
+  tbody tr {
+    transition: background-color var(--transition-speed) ease;
+
+    &:hover {
+      background-color: var(--background-page);
+    }
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.actions-cell {
+  display: flex;
+  gap: 8px;
+}
+
+.action-button {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 6px 12px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &.edit {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+
+    &:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+  }
+
+  &.activate {
+    color: var(--success-color);
+    border-color: var(--success-color);
+    min-width: 95px;
+
+    &:hover {
+      background-color: var(--success-color);
+      color: white;
+    }
+  }
+
+  &.deactivate {
+    color: var(--danger-color);
+    border-color: var(--danger-color);
+    min-width: 95px;
+
+    &:hover {
+      background-color: var(--danger-color);
+      color: white;
+    }
+  }
+}
+
+.error-message {
+  color: var(--danger-color);
+  background-color: rgba(220, 53, 69, 0.1);
+  border: 1px solid var(--danger-color);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: var(--border-radius);
 }

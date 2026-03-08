@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace Fretefy.Test.WebApi
 {
@@ -11,6 +12,10 @@ namespace Fretefy.Test.WebApi
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
+
+            // Garantir que a pasta para o arquivo SQLite exista antes de migrar
+            var dataDir = Path.Combine(Directory.GetCurrentDirectory(), "Data");
+            Directory.CreateDirectory(dataDir);
 
             // Apenas devido ao uso do InMemory
             using (var scope = host.Services.CreateScope())

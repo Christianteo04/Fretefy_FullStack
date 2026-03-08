@@ -50,6 +50,7 @@ namespace Fretefy.Test.Domain.Services
             {
                 Id = regiao.Id,
                 Nome = regiao.Nome,
+                Ativo = regiao.Ativo,
                 Cidades = regiao.RegiaoCidades.Select(rc => new CidadeDto
                 {
                     Id = rc.Cidade.Id,
@@ -66,20 +67,27 @@ namespace Fretefy.Test.Domain.Services
                 throw new Exception($"Já existe uma região com o nome '{dto.Nome}'.");
             }
 
+            if (dto.CidadeIds == null || !dto.CidadeIds.Any())
+            {
+                throw new Exception("É obrigatório informar ao menos uma cidade na região.");
+            }
+
+            if (dto.CidadeIds.Count != dto.CidadeIds.Distinct().Count())
+            {
+                throw new Exception("Não é permitido informar a mesma cidade mais de uma vez.");
+            }
+
             var regiao = new Regiao { Nome = dto.Nome, Ativo = dto.Ativo };
 
-            if (dto.CidadeIds != null && dto.CidadeIds.Any())
+            var cidadesExistentes = await _cidadeRepository.ListByIdsAsync(dto.CidadeIds);
+            if (cidadesExistentes.Count() != dto.CidadeIds.Count)
             {
-                var cidadesExistentes = await _cidadeRepository.ListByIdsAsync(dto.CidadeIds);
-                if (cidadesExistentes.Count() != dto.CidadeIds.Count)
-                {
-                    throw new KeyNotFoundException("Uma ou mais cidades fornecidas não foram encontradas.");
-                }
+                throw new KeyNotFoundException("Uma ou mais cidades fornecidas não foram encontradas.");
+            }
 
-                foreach (var cidadeId in dto.CidadeIds)
-                {
-                    regiao.RegiaoCidades.Add(new RegiaoCidade { CidadeId = cidadeId });
-                }
+            foreach (var cidadeId in dto.CidadeIds)
+            {
+                regiao.RegiaoCidades.Add(new RegiaoCidade { CidadeId = cidadeId });
             }
 
             await _regiaoRepository.AdicionarAsync(regiao);
@@ -98,6 +106,16 @@ namespace Fretefy.Test.Domain.Services
             if (await _regiaoRepository.NomeJaExiste(dto.Nome, id))
             {
                 throw new Exception($"Já existe uma região com o nome '{dto.Nome}'.");
+            }
+
+            if (dto.CidadeIds == null || !dto.CidadeIds.Any())
+            {
+                throw new Exception("É obrigatório informar ao menos uma cidade na região.");
+            }
+
+            if (dto.CidadeIds.Count != dto.CidadeIds.Distinct().Count())
+            {
+                throw new Exception("Não é permitido informar a mesma cidade mais de uma vez.");
             }
 
             regiaoExistente.Nome = dto.Nome;
@@ -127,6 +145,18 @@ namespace Fretefy.Test.Domain.Services
             }
 
             await _regiaoRepository.AtualizarAsync(regiaoExistente);
+        }
+
+        public async Task ToggleAtivoAsync(Guid id)
+        {
+            var regiao = await _regiaoRepository.ObterPorIdComCidadesAsync(id);
+            if (regiao == null)
+            {
+                throw new KeyNotFoundException("Região não encontrada.");
+            }
+
+            regiao.Ativo = !regiao.Ativo;
+            await _regiaoRepository.AtualizarAsync(regiao);
         }
     }
 }

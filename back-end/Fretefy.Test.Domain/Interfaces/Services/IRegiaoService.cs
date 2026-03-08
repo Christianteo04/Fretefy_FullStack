@@ -11,5 +11,6 @@ namespace Fretefy.Test.Domain.Interfaces.Services
         Task<RegiaoDto> ObterRegiaoPorIdAsync(Guid id);
         Task<RegiaoDto> CriarRegiaoAsync(CreateRegiaoDto dto);
         Task AtualizarRegiaoAsync(Guid id, UpdateRegiaoDto dto);
+        Task ToggleAtivoAsync(Guid id);
     }
 }

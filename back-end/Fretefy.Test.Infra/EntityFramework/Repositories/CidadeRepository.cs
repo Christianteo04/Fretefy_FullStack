@@ -1,4 +1,4 @@
-﻿using Fretefy.Test.Domain.Entities;
+using Fretefy.Test.Domain.Entities;
 using Fretefy.Test.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,19 +24,28 @@ namespace Fretefy.Test.Infra.EntityFramework.Repositories
 
         public async Task<IEnumerable<Cidade>> ListAsync()
         {
-            return await _dbSet.ToListAsync();
+            return await _dbSet
+                .OrderBy(c => c.Nome)
+                .ThenBy(c => c.UF)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Cidade>> ListByUfAsync(string uf)
         {
-            return await _dbSet.Where(w => EF.Functions.Like(w.UF, $"%{uf}%"))
-                               .ToListAsync();
+            return await _dbSet
+                .Where(w => EF.Functions.Like(w.UF, $"%{uf}%"))
+                .OrderBy(c => c.Nome)
+                .ThenBy(c => c.UF)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Cidade>> QueryAsync(string terms)
         {
-            return await _dbSet.Where(w => EF.Functions.Like(w.Nome, $"%{terms}%") || EF.Functions.Like(w.UF, $"%{terms}%"))
-                               .ToListAsync();
+            return await _dbSet
+                .Where(w => EF.Functions.Like(w.Nome, $"%{terms}%") || EF.Functions.Like(w.UF, $"%{terms}%"))
+                .OrderBy(c => c.Nome)
+                .ThenBy(c => c.UF)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Cidade>> ListByIdsAsync(IEnumerable<Guid> ids)

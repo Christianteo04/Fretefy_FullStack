@@ -83,6 +83,20 @@ namespace Fretefy.Test.WebApi.Controllers
             }
         }
 
+        [HttpPut("{id}/toggle-ativo")]
+        public async Task<IActionResult> ToggleAtivo(Guid id)
+        {
+            try
+            {
+                await _regiaoService.ToggleAtivoAsync(id);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
         [HttpGet("export")]
         public async Task<IActionResult> Exportar()
         {

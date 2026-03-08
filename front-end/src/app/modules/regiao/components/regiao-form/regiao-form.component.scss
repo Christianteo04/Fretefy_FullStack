@@ -1,148 +1,89 @@
-$primary-color: #3498db;
-$primary-color-hover: #2980b9;
-$success-color: #27ae60;
-$success-color-hover: #219653;
-$danger-color: #d9534f;
-$gray-color: #6c757d;
-$gray-color-hover: #5a6268;
-$border-color: #ced4da;
-$light-gray: #f8f9fa;
-$text-color: #495057;
-$border-radius: 5px;
-$spacing-unit: 1rem; 
-
-
 * {
   box-sizing: border-box;
 }
 
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: $spacing-unit;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 1.5 * $spacing-unit; 
-
-  h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #333;
-  }
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
 }
-
-.close-button {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  line-height: 1;
-  cursor: pointer;
-  padding: 0;
-  color: #aaa;
-  transition: color 0.2s ease;
-
-  &:hover {
-    color: #555;
-  }
-}
-
-.form-body-scrollable {
-  flex-grow: 1; 
-  overflow-y: auto;
-  overflow-x: hidden; 
-  padding-right: 0.5rem; 
-  margin-bottom: 1.5 * $spacing-unit; 
-}
-
 
 .form-group {
-  margin-bottom: 1.5 * $spacing-unit;
+  margin-bottom: 1.5rem;
 }
 
 label {
   display: block;
-  margin-bottom: 0.5 * $spacing-unit;
+  margin-bottom: 0.5rem;
   font-weight: 500;
-  color: $text-color;
+  color: var(--text-muted);
   font-size: 0.95rem;
 }
 
 input[type="text"] {
   display: block;
   width: 100%;
-  padding: 0.75 * $spacing-unit;
+  padding: 0.75rem 1rem;
   font-size: 1rem;
-  border: 1px solid $border-color;
-  border-radius: $border-radius;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  color: $text-color;
-  box-sizing: border-box; 
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  color: var(--text-main);
+  background-color: var(--background-card);
+  font-family: inherit;
 
   &:focus {
     outline: none;
-    border-color: $primary-color;
-    box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
   }
 
   &.ng-invalid.ng-touched {
-    border-color: $danger-color;
+    border-color: var(--danger-color);
   }
 }
-
 
 .cidade-item {
   display: flex;
   align-items: center;
-  gap: 0.75 * $spacing-unit;
-  margin-bottom: 0.75 * $spacing-unit; 
+  gap: 1rem;
+  margin-bottom: 1rem;
 
   &:last-of-type {
-    margin-bottom: 0; 
+    margin-bottom: 0;
   }
 }
 
 .selector-container {
-  flex-grow: 1; 
+  flex-grow: 1;
 }
 
 .remove-button {
   background: none;
   border: none;
-  color: #999;
+  color: var(--neutral-color);
   cursor: pointer;
   padding: 0;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   line-height: 1;
   text-align: center;
-  transition: background-color 0.2s ease, color 0.2s ease;
-  flex-shrink: 0; 
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+  flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  overflow: hidden; 
-  text-indent: -9999px; 
 
-  &::before {
-    content: '\00D7'; 
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #999;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-indent: 0;
+  .material-icons {
+    font-size: 1.25rem;
   }
 
   &:hover {
-    background-color: rgba($danger-color, 0.1);
-  }
-  &:hover::before {
-    color: $danger-color;
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--danger-color);
   }
 }
 
@@ -152,21 +93,21 @@ input[type="text"] {
 
 .add-button {
   background-color: transparent;
-  color: $primary-color;
-  border: 1px dashed $primary-color;
-  padding: 0.75 * $spacing-unit 1.5 * $spacing-unit;
+  color: var(--primary-color);
+  border: 1px dashed var(--primary-color);
+  padding: 0.75rem 1.5rem;
   width: 100%;
-  border-radius: $border-radius;
+  border-radius: var(--border-radius);
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.2s ease;
-  margin-top: 0.5 * $spacing-unit;
-  box-sizing: border-box;
+  transition: all var(--transition-speed) ease;
+  margin-top: 1rem;
 
   &:hover {
-    background-color: rgba($primary-color, 0.1);
-    border-color: $primary-color-hover;
-    color: $primary-color-hover;
+    background-color: rgba(0, 123, 255, 0.05);
+    /* primary shadow */
+    color: var(--primary-hover);
+    border-color: var(--primary-hover);
   }
 
   &:active {
@@ -177,30 +118,29 @@ input[type="text"] {
 .form-actions {
   display: flex;
   justify-content: flex-end;
-  gap: $spacing-unit;
-  margin-top: $spacing-unit; 
-  padding-top: 1.5 * $spacing-unit;
-  border-top: 1px solid #eee;
-  flex-shrink: 0; 
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
 }
 
 .button {
-  padding: 0.75 * $spacing-unit 1.5 * $spacing-unit;
+  padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: $border-radius;
+  border-radius: var(--border-radius);
   cursor: pointer;
   font-weight: 500;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition: background-color var(--transition-speed) ease, transform 0.1s ease, box-shadow var(--transition-speed) ease;
   font-size: 1rem;
-  box-sizing: border-box;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   &:disabled {
-    background-color: #ccc;
+    background-color: var(--border-color);
+    color: var(--neutral-color);
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
@@ -208,11 +148,13 @@ input[type="text"] {
 }
 
 .submit-button {
-  background-color: $success-color;
+  background-color: var(--success-color);
   color: white;
+
   &:hover:not(:disabled) {
-    background-color: $success-color-hover;
+    background-color: var(--success-hover);
   }
+
   &:active:not(:disabled) {
     transform: translateY(0);
     box-shadow: none;
@@ -220,13 +162,15 @@ input[type="text"] {
 }
 
 .cancel-button {
-  background-color: #fff;
-  color: $gray-color;
-  border: 1px solid $border-color;
+  background-color: transparent;
+  color: var(--neutral-color);
+  border: 1px solid var(--border-color);
+
   &:hover:not(:disabled) {
-    background-color: $light-gray;
-    color: $gray-color-hover;
+    background-color: var(--background-page);
+    color: var(--text-main);
   }
+
   &:active:not(:disabled) {
     transform: translateY(0);
     box-shadow: none;
@@ -234,18 +178,36 @@ input[type="text"] {
 }
 
 .validation-errors small {
-  color: $danger-color;
-  font-size: 0.8em;
+  color: var(--danger-color);
+  font-size: 0.85rem;
   font-weight: 500;
   display: block;
-  margin-top: 0.25 * $spacing-unit;
+  margin-top: 0.5rem;
 }
 
 .error-message {
-  color: $danger-color;
-  font-size: 0.9rem;
-  margin-top: 0.5 * $spacing-unit;
-  padding: 0.5 * $spacing-unit;
-  background-color: rgba($danger-color, 0.1);
-  border-radius: $border-radius;
+  color: var(--danger-color);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: rgba(220, 53, 69, 0.1);
+  border: 1px solid var(--danger-color);
+  border-radius: var(--border-radius);
+}
+
+.success-message {
+  color: var(--success-color);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: rgba(40, 167, 69, 0.1);
+  border: 1px solid var(--success-color);
+  border-radius: var(--border-radius);
+}
+
+.loading-indicator {
+  padding: 1rem;
+  text-align: center;
+  font-weight: 500;
+  color: var(--text-muted);
 }

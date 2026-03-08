@@ -1,12 +1,96 @@
+:root {
+  /* Soft Color Palette (Light Mode) */
+  --primary-color: #4b6584;
+  /* Soft blueish grey */
+  --primary-hover: #384b61;
+  --success-color: #44bd32;
+  /* Softer mint/sage green */
+  --success-hover: #35a025;
+  --danger-color: #d1394c;
+  /* Soft red */
+  --danger-hover: #b82d3e;
+  --warning-color: #f39c12;
+  --neutral-color: #8395a7;
+
+  --background-page: #fafbfc;
+  /* Very clean, non-aggressive white/grey */
+  --background-card: #ffffff;
+  --text-main: #2f3640;
+  --text-muted: #718093;
+  --border-color: #dcdde1;
+
+  /* Typography */
+  --font-family: 'Inter', Roboto, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Metrics */
+  --container-max-width: 1000px;
+  --border-radius: 30px;
+  /* Unified Pill Shape */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.06);
+  --transition-speed: 0.3s;
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] {
+  --primary-color: #6a89cc;
+  --primary-hover: #82ccdd;
+  --success-color: #78e08f;
+  --success-hover: #b8e994;
+  --danger-color: #e55039;
+  --danger-hover: #eb2f06;
+  --warning-color: #f6b93b;
+  --neutral-color: #a4b0be;
+
+  --background-page: #1e272e;
+  --background-card: #2f3640;
+  --text-main: #f5f6fa;
+  --text-muted: #dcdde1;
+  --border-color: #4b6584;
+  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 
 * {
-    font-family: Nunito Sans,Segoe UI,Helvetica Neue,Arial,sans-serif;
+  box-sizing: border-box;
 }
 
-html, body {
-    padding: 0;
-    margin: 0;
-    background-color: #dfe6e9;
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: var(--background-page);
+  color: var(--text-main);
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Global button styles to ensure consistency if not overriden */
+button {
+  font-family: var(--font-family);
+  cursor: pointer;
+  border: none;
+  border-radius: var(--border-radius);
+  transition: all var(--transition-speed) ease;
+}
+
+/* Centralized Layout for routed components: Ignoring app-toolbar AND router-outlet */
+app-root>*:not(app-toolbar):not(router-outlet) {
+  display: block;
+  max-width: var(--container-max-width);
+  margin: 2rem auto;
+  background-color: var(--background-card);
+  border-radius: 12px;
+  /* Containers kept slightly less pill-like than buttons to remain practical */
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+  transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+@media (max-width: 1024px) {
+  app-root>*:not(app-toolbar):not(router-outlet) {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}
